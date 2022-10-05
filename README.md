@@ -1,69 +1,78 @@
-This is my set of answers to Assignment 1:
+This is my set of answers to Assignment 2:
 
-Print exercises:
-1) See "yourname.py" file
-2) No, no variables show up in the variable explorer.
+Variable Operations Exercises:
+1) Only the string form of subnr works because we are combining two variables of the same type, whereas with subnr_int we are combining a string and an integer.
+2) print(sub_code + (" ") + sub_nrstr)
+print(sub_code + (" ") + (sub_nrstr)*3)
+print((sub_code + sub_nrstr)*3)
+print((sub_code)*3 + (sub_nrstr)*3)
 
-Operation Exercises:
-1) No, both operations output a value of 2.5
-2) The modulo operator calculates the remainder after dividing two values (25%6 = 1).
-3) The ** operator applies an exponent (3**2 = 9), the // operator divides and rounds down to the nearest integer (85/4 = 21).
-4) Yes, python follows order of operations (12/6*2+3 = 7).
+List Operations Exercises:
+1)numlist = [1, 2, 3]
 
-Variable Exercises:
-2) Yes, I now have five seperate string variables for each letter.
-3) Python does not seem to have an isse with two different variables with the sane value.
-5) No, changing the value of leterX did not change the value of letter1.
-6) After making letterX = letter1, changing the value of letter1 did effect the output. This means that variables can be reassigned to other variables and follow those variables rules.
-
-Boolean exercises:
-1) 1 and 1.0 are equivalent because python treats these as operations and they give the same value. However, "1" and "1.0" are not equivelent because they are treated as text and don't have the same characters.
-2) Yes, 5 and (3+2) are equivalent.
-3) 1. [1 == 1.0] or ["1" == "1.0"] and [5 == (3+2)]
-   2. [1 == 1.0] or ["1" == "1.0"] or [5 == (3+2)]
-   3. [1 == 1.0] and not ["1" == "1.0"] or [5 == (3+2)]
-   4. [1 == 1.0] and ["1" == "1.0"] and [5 == (3+2)]
-   5. [1 == 1.0] or ["1" == "1.0"] and [5 == (3+2)]
-   
-   
-List exercises
-1) oddlist = list(range(0,11)). Yes, oddlist became a list type variable with a size of 11 (0,11)
-2) No errors when printing oddlist.
-3) Python says the list is 11 numbers long.
-4) Python says the variable is list type.
-5) intlist = list(range(0,101)
-6) Yes, python lists all 100 integers.
-
-Dictionary exercises
-1) myname = "Milan"
-myage = 22.0
-yearofstudy = 5
-favourite_foods = ["tacos", "pizza", "ramen"]
-
-about_me = {'name':myname, 'age':myage, 'study':yearofstudy, 'foods':favourite_foods}
-
-2) about_me is a dictionary type variable.
-3) The length of the dictionary is 4 - so python checks the amount of variables contained in the dictionary to define the length.
-
-Array Exercises:
-1)import numpy as np
-mixnumpy = np.array([1,2.0,3,4.0,5,6.0])
-print(mixnumpy)
-
-In the console and variable explorer we can see that the array has become an array of floats.
+print((numlist)*2)
 
 2)import numpy as np
-mixtypes = np.array([1, 2, 3.0, 4.0, "Name", "Age"])
-print(mixtypes)
 
-python has converted the array to an array of strings, 
+numarr = np.array([1, 2, 3])
+print((numarr)*2)
 
-3) import numpy as np
-oddarray = np.linspace(1, 99, 50)
-print(oddarray)
+When we multiply an array by 2, the integers within the array are each multiplied individually, whereas when we multiply a list, the list itself is doubled as a whole.
 
-4)import numpy as np
-logarray = np.logspace(0, 0.69897000433, 16)
-print(logarray)
+3) strlist = ["do"*2, "re"*2, "mi"*2, "fa"*2]
+strlistarr = np.array(strlist)
+print((strlistarr))
 
-   
+strlist = [["do"]*2, ["re"]*2, ["mi"]*2, ["fa"]*2]
+strlistarr = np.array(strlist)
+print((strlistarr))
+
+
+Zipping Exercise: 
+
+houses = ["house1.png", "house2.png", "house3.png", "house4.png", "house5.png"]
+faces = ["face1.png", "face2.png", "face3.png", "face4.png", "face5.png"]
+cues = ["cue1", "cue2"]
+
+houses_extend = houses*5
+faces_extend = list(np.repeat(faces,5))
+
+
+
+pairing1 = list(zip(houses_extend, faces_extend, ["cue1"]*25))
+pairing1_cb = list(zip(faces_extend, houses_extend, ["cue1"]*25))
+pairing2 = list(zip(houses_extend, faces_extend, ["cue2"]*25))
+pairing2_cb = list(zip(faces_extend, houses_extend, ["cue2"]*25))
+
+finalexp = pairing1 + pairing1_cb + pairing2 + pairing2_cb
+
+
+import numpy as np
+numpy_exp = np.array(finalexp)
+np.random.shuffle(numpy_exp)
+print(numpy_exp)
+
+
+Indexing Exercises:
+1)colours = ["red", "orange", "yellow", "green", "blue", "purple"]
+2)print(colours[4])
+3)print(colours[4][2] + colours[4][3]) 
+4)colours.remove("purple")
+colours.insert(5,"violet")
+colours.insert(6,"indigo")
+
+print(colours)
+
+Slicing Exercises:
+1)list100 = (range(101))
+print(list(list100))
+
+2)print(list(list100[:11]))
+
+3)print(list(list100[::-2]))
+
+4)print(list(list100[101:96:-1]))
+
+5)print(list(list100[40:44:1]) == [39, 40, 41, 42, 43])
+
+They are not the same (false)
