@@ -1,69 +1,116 @@
-This is my set of answers to Assignment 1:
+This is my set of answers to Assignment 3:
 
-Print exercises:
-1) See "yourname.py" file
-2) No, no variables show up in the variable explorer.
+Conditionals Exercises:
+1) response = '1'
 
-Operation Exercises:
-1) No, both operations output a value of 2.5
-2) The modulo operator calculates the remainder after dividing two values (25%6 = 1).
-3) The ** operator applies an exponent (3**2 = 9), the // operator divides and rounds down to the nearest integer (85/4 = 21).
-4) Yes, python follows order of operations (12/6*2+3 = 7).
+if response == "1" or response == '2':
+    print("OK")
+    
+elif response == "NaN":
+    print("subject did not respond")
+    
+else: print("subject pressed the wrong key")
 
-Variable Exercises:
-2) Yes, I now have five seperate string variables for each letter.
-3) Python does not seem to have an isse with two different variables with the sane value.
-5) No, changing the value of leterX did not change the value of letter1.
-6) After making letterX = letter1, changing the value of letter1 did effect the output. This means that variables can be reassigned to other variables and follow those variables rules.
+2)response = '1'
 
-Boolean exercises:
-1) 1 and 1.0 are equivalent because python treats these as operations and they give the same value. However, "1" and "1.0" are not equivelent because they are treated as text and don't have the same characters.
-2) Yes, 5 and (3+2) are equivalent.
-3) 1. [1 == 1.0] or ["1" == "1.0"] and [5 == (3+2)]
-   2. [1 == 1.0] or ["1" == "1.0"] or [5 == (3+2)]
-   3. [1 == 1.0] and not ["1" == "1.0"] or [5 == (3+2)]
-   4. [1 == 1.0] and ["1" == "1.0"] and [5 == (3+2)]
-   5. [1 == 1.0] or ["1" == "1.0"] and [5 == (3+2)]
+if response == "1" or response == '2':
+    print("OK")
+    if response == "1":
+        print("Correct!")
+    if response == "2":
+        print("Incorrect!")
+        
+ 3) The script does what it's supposed to for the most part. For the responses of 1 and 2, we get the ouput "OK" along with the corresponding accuracy message. For any other response, we get the wrong key message. However, for when response is not filled, or the scenario where the subject did not respond, we still get the subject pressed the wrong key message. The response needs to be specifically NaN for the no response message to run (if the system we are using to run the study codes a non-response as "NaN" this works fine).
+ 
+ For Loop Exercises:
+ 
+ 1)letter = ["M", "I", "L", "A", "N"]
+
+for i in letter:
+    name = i
+    print(name)
+2) letter = ["M", "I", "L", "A", "N"]
+
+count = -1
+
+for i in letter:
+    count = count+1
+    
+    name = i
+    print(name)
+    print("Letter %i" %count)
+    
+3) names = ["Amy", "Rory", "River"]
+
+for name in names: #loops through names
+    print(name)
+    
+    for letter in name: #loops through letters
+        print(letter)
+        
+4) names = ["Amy", "Rory", "River"]
+
+
+for name in names: #loops through names
+    
+    print(name)
+    count = 0
+    
+    for letter in name: #loops through letter
+        print(letter)
+        print("Letter %i" %count)
+        count = count + 1
+        
+
+
+While Loop Exercises:
+1) iteration = 0
+
+while iteration < 10:
+    print("image1.png")
+    iteration = iteration + 1
    
-   
-List exercises
-1) oddlist = list(range(0,11)). Yes, oddlist became a list type variable with a size of 11 (0,11)
-2) No errors when printing oddlist.
-3) Python says the list is 11 numbers long.
-4) Python says the variable is list type.
-5) intlist = list(range(0,101)
-6) Yes, python lists all 100 integers.
+    if iteration == 10:
+        iteration  = iteration + 1
+        break
 
-Dictionary exercises
-1) myname = "Milan"
-myage = 22.0
-yearofstudy = 5
-favourite_foods = ["tacos", "pizza", "ramen"]
+while iteration > 10:
+    print("image2.png")
+    iteration = iteration + 1
+    
+    if iteration == 21:
+        break
+        
+2) import random
 
-about_me = {'name':myname, 'age':myage, 'study':yearofstudy, 'foods':favourite_foods}
+response = False
+iteration = 0
 
-2) about_me is a dictionary type variable.
-3) The length of the dictionary is 4 - so python checks the amount of variables contained in the dictionary to define the length.
+while not response:
+    iteration = iteration + 1
+    print("showing an image for %i iterations" %iteration)
+    
+    if random.randint(0,20) == 1 or random.randint(0,10) == 2:
+        response = True
+        
+3) import random
 
-Array Exercises:
-1)import numpy as np
-mixnumpy = np.array([1,2.0,3,4.0,5,6.0])
-print(mixnumpy)
+response = False
+iteration = 0
 
-In the console and variable explorer we can see that the array has become an array of floats.
+failsafe = -1
 
-2)import numpy as np
-mixtypes = np.array([1, 2, 3.0, 4.0, "Name", "Age"])
-print(mixtypes)
+while not response:
+    
+    failsafe  = failsafe +1 
+    if failsafe == 5:
+        break
+    
+    iteration = iteration + 1
+    print("showing an image for %i iterations" %iteration)
+    
+    if random.randint(0,20) == 1 or random.randint(0,10) == 2:
+        response = True
 
-python has converted the array to an array of strings, 
-
-3) import numpy as np
-oddarray = np.linspace(1, 99, 50)
-print(oddarray)
-
-4)import numpy as np
-logarray = np.logspace(0, 0.69897000433, 16)
-print(logarray)
-
-   
+ 
+ 
