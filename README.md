@@ -1,7 +1,8 @@
 This is my set of answers to Assignment 3:
 
 Conditionals Exercises:
-1) response = '1'
+1)
+response = '1'
 
 if response == "1" or response == '2':
     print("OK")
@@ -11,7 +12,8 @@ elif response == "NaN":
     
 else: print("subject pressed the wrong key")
 
-2)response = '1'
+2)
+response = '1'
 
 if response == "1" or response == '2':
     print("OK")
@@ -24,7 +26,8 @@ if response == "1" or response == '2':
  
  For Loop Exercises:
  
- 1)letter = ["M", "I", "L", "A", "N"]
+ 1)
+letter = ["M", "I", "L", "A", "N"]
 
 for i in letter:
     name = i
@@ -40,7 +43,8 @@ for i in letter:
     print(name)
     print("Letter %i" %count)
     
-3) names = ["Amy", "Rory", "River"]
+3)
+names = ["Amy", "Rory", "River"]
 
 for name in names: #loops through names
     print(name)
@@ -48,7 +52,8 @@ for name in names: #loops through names
     for letter in name: #loops through letters
         print(letter)
         
-4) names = ["Amy", "Rory", "River"]
+4) 
+names = ["Amy", "Rory", "River"]
 
 
 for name in names: #loops through names
@@ -64,7 +69,8 @@ for name in names: #loops through names
 
 
 While Loop Exercises:
-1) iteration = 0
+1) 
+iteration = 0
 
 while iteration < 10:
     print("image1.png")
@@ -81,7 +87,8 @@ while iteration > 10:
     if iteration == 21:
         break
         
-2) import random
+2) 
+import random
 
 response = False
 iteration = 0
@@ -93,7 +100,8 @@ while not response:
     if random.randint(0,20) == 1 or random.randint(0,10) == 2:
         response = True
         
-3) import random
+3) 
+import random
 
 response = False
 iteration = 0
