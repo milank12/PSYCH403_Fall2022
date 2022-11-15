@@ -1,69 +1,109 @@
-This is my set of answers to Assignment 1:
+This is my set of answers to Assignment 6:
 
-Print exercises:
-1) See "yourname.py" file
-2) No, no variables show up in the variable explorer.
+Dialog Box Exercises:
+1 and 2:
+from psychopy import gui
 
-Operation Exercises:
-1) No, both operations output a value of 2.5
-2) The modulo operator calculates the remainder after dividing two values (25%6 = 1).
-3) The ** operator applies an exponent (3**2 = 9), the // operator divides and rounds down to the nearest integer (85/4 = 21).
-4) Yes, python follows order of operations (12/6*2+3 = 7).
-
-Variable Exercises:
-2) Yes, I now have five seperate string variables for each letter.
-3) Python does not seem to have an isse with two different variables with the sane value.
-5) No, changing the value of leterX did not change the value of letter1.
-6) After making letterX = letter1, changing the value of letter1 did effect the output. This means that variables can be reassigned to other variables and follow those variables rules.
-
-Boolean exercises:
-1) 1 and 1.0 are equivalent because python treats these as operations and they give the same value. However, "1" and "1.0" are not equivelent because they are treated as text and don't have the same characters.
-2) Yes, 5 and (3+2) are equivalent.
-3) 1. [1 == 1.0] or ["1" == "1.0"] and [5 == (3+2)]
-   2. [1 == 1.0] or ["1" == "1.0"] or [5 == (3+2)]
-   3. [1 == 1.0] and not ["1" == "1.0"] or [5 == (3+2)]
-   4. [1 == 1.0] and ["1" == "1.0"] and [5 == (3+2)]
-   5. [1 == 1.0] or ["1" == "1.0"] and [5 == (3+2)]
+my_dlg = gui.Dlg(title="my experiment")
+my_dlg.addFixedField('session:',1)
+my_dlg.addText('exp_info')
+my_dlg.addField('age:',0)
+my_dlg.addField('gender:')
+my_dlg.addField('handedness:', choices=['right', 'left'])
+my_dlg.addField('subject_nr:',0)
+show_dlg = my_dlg.show() 
    
-   
-List exercises
-1) oddlist = list(range(0,11)). Yes, oddlist became a list type variable with a size of 11 (0,11)
-2) No errors when printing oddlist.
-3) Python says the list is 11 numbers long.
-4) Python says the variable is list type.
-5) intlist = list(range(0,101)
-6) Yes, python lists all 100 integers.
+Using DlgFromDict:
 
-Dictionary exercises
-1) myname = "Milan"
-myage = 22.0
-yearofstudy = 5
-favourite_foods = ["tacos", "pizza", "ramen"]
+subject_info = {'session':1,'subject_nr':0, 'age':0, 'gender':('male','female','other','prefer not to say'), 'handedness':('right','left','ambi')}
 
-about_me = {'name':myname, 'age':myage, 'study':yearofstudy, 'foods':favourite_foods}
+from psychopy import gui
+print("All variables have been created! Now ready to show dialog box!")
+print(subject_info)
+my_dlg = gui.DlgFromDict(dictionary=subject_info, title = "subject info", fixed = "session")
 
-2) about_me is a dictionary type variable.
-3) The length of the dictionary is 4 - so python checks the amount of variables contained in the dictionary to define the length.
 
-Array Exercises:
-1)import numpy as np
-mixnumpy = np.array([1,2.0,3,4.0,5,6.0])
-print(mixnumpy)
+5.
+from psychopy import gui
 
-In the console and variable explorer we can see that the array has become an array of floats.
+my_dlg = gui.Dlg(title="my experiment")
+my_dlg.addField('age:',0)
+my_dlg.addField('gender:')
+my_dlg.addField('handedness:', choices=['right', 'left'])
+my_dlg.addField('subject_nr:',0)
+show_dlg = my_dlg.show() 
 
-2)import numpy as np
-mixtypes = np.array([1, 2, 3.0, 4.0, "Name", "Age"])
-print(mixtypes)
+from datetime import datetime
 
-python has converted the array to an array of strings, 
+date = datetime.now()
+print(date)
 
-3) import numpy as np
-oddarray = np.linspace(1, 99, 50)
-print(oddarray)
+filename = str(exp_info['subject_nr']) + '_' + exp_info['date'] + '.csv'
+print(filename)
 
-4)import numpy as np
-logarray = np.logspace(0, 0.69897000433, 16)
-print(logarray)
+main_dir = os.getcwd() 
+sub_dir = os.path.join(main_dir,'sub_info',filename)
 
-   
+Monitor and Window Exercises:
+1. Using different units for the monitor size will affect the size of the window and the stimuli created and how they are diplayed on the screen. For example, the height unit will make everything fit corresponding to the height of the window while keeping the stimuli square, while centimeters will set the size and location of the stimuli based on the given centimetres for the size of the screen.
+2. Changing the colour space values will change the lightness of colour present in the window, on a scale of -1 to 1, with -1 being dark (black) and 1 being full opacity. (-1, 1, -1) gives a fully green screen, (1, -1, 1) gives magenta, (0, -1, -1) will give dark red.
+3.
+from psychopy import visual, monitors
+
+mon = monitors.Monitor('myMonitor', width=36.83, distance=60)
+mon.setSizePix([2560,1440])
+
+win = visual.Window(monitor=mon, size=(200,200), color=[-1,-1,-1], units = "height")
+
+Stimulus Exercises:
+1. from psychopy import visual, monitors, event
+
+mon = monitors.Monitor('myMonitor', width=36.83, distance=60)
+mon.setSizePix([2560,1440])
+
+win = visual.Window(monitor=mon, size=(400,400), color=[-1,-1,-1])
+import os
+os.chdir('/Users/milankalra/Documents') 
+main_dir = os.getcwd() 
+image_dir = os.path.join(main_dir,'images') 
+
+pic_loc = os.path.join(image_dir,'face01.jpg')
+
+my_image = visual.ImageStim(win, image=pic_loc,size=1)) 
+
+my_image.draw()
+win.flip()
+event.waitKeys()
+win.close()
+
+When using a 400 x 400 window, the image is cut off on the ends because of the aspect ratio not matching the window. If you use the size paramater in ImageStim, you can change the aspect ratio and make it wider by using "size+=(0.5,-0.5)"
+
+
+3. fix_text = visual.TextStim(win, text='+')
+4. 
+start_msg = "Welcome to my experiment!"
+block_msg = "Press any key to continue to the next block."
+end_trial_msg = "End of block."
+
+my_text = visual.TextStim(win)
+my_image = visual.ImageStim(win)
+
+my_text.text = start_msg
+my_text.draw()
+win.flip() 
+event.waitKeys() 
+
+for block in range (nBlocks):
+    my_text.text = block_msg
+    my_image.draw()
+    win.flip()
+    event.waitKeys()
+    
+    for trial in range (nTrials):
+      my_image.image = os.path.join(image_dir,stims[trial])
+      my_image.draw() 
+      fix_text.draw() 
+      win.flip() 
+      event.waitKeys()   
+        
+win.close()        
