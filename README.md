@@ -135,5 +135,163 @@ This method doesn't seem very accurate, with comparable results to core.wait. Th
 
 
 4.
+#=====================
+#START EXPERIMENT
+#=====================
+my_text.text = start_msg
+my_text.draw()  #-present start message text
+win.flip() 
+event.waitKeys() #-allow participant to begin experiment with button press
 
+blockTimer = core.Clock()
+trialTimer = core.Clock()
+stimTimer = core.Clock()
+respTimer = core.Clock()
+#=====================
+#BLOCK SEQUENCE
+#=====================
+for block in range (nBlocks): #-for loop for nBlocks
+    blockTimer.reset()
+    blockStart = blockTimer.getTime()
+    
+    my_text.text = block_msg #-present block start message
+    my_text.draw()
+    win.flip()
+    event.waitKeys()
+    np.random.shuffle(stims) #-randomize order of trials here
+    #-reset response time clock here
+    
+    #=====================
+    #TRIAL SEQUENCE
+    #=====================    
+    for trial in range (nTrials):  #-for loop for nTrials *
+        trialTimer.reset()
+        trialStart = trialTimer.getTime()
+    
+        my_image.image = os.path.join(image_dir,stims[trial])
+        
+        stimTimer.reset()
+        while stimTimer() <= 1:
+            fix_text.draw() 
+            win.flip() 
+            core.wait(.5)
+        
+        stimTimer.reset()
+        respTimer.reset()
+        while stimTimer() <= .5:
+            my_image.draw()
+            win.flip()
+            core.wait(1)
+        
+        stimTimer.reset()
+        while stimTimer() <= 1:
+            fix_text.draw() 
+            win.flip() 
+            core.wait(.5)
+        
+        event.waitKeys(0)
+        RTrespTimer.getTime()
+        
+        trialEnd = trialTimer.getTime()
+    
+    blockEnd = blockTimer.getTime()
 
+Frame-based Timing Exercises:
+
+1.
+mon = monitors.Monitor('myMonitor', width=36.83, distance=60)
+mon.setSizePix([2560,1440])
+
+win = visual.Window(monitor=mon, size=(200,200), color=[-1,-1,-1], units = "height")
+start_msg = "Welcome to my experiment!" #-define experiment start text unsing psychopy functions
+block_msg = "Press any key to continue to the next block." #-define block (start)/end text using psychopy functions
+end_trial_msg = "End of block."
+
+my_text = visual.TextStim(win)
+my_image = visual.ImageStim(win) 
+fix_text = visual.TextStim(win, text='+')#-define stimuli using psychopy functions
+#set durations
+fix_dur = 0.2 #200 ms
+image_dur = 0.1 #100 ms
+text_dur = 0.2 #200 ms
+
+refresh=1.0/60.0
+#set frame counts
+fix_frames = int(fix_dur / refresh) #whole number
+image_frames = int(image_dur / refresh) #whole number
+text_frames = int(text_dur / refresh) #whole number
+#the total number of frames to be presented on a trial
+total_frames = int(fix_frames + image_frames + text_frames)
+#-create response time clock
+#-make mouse pointer invisible
+
+#=====================
+#START EXPERIMENT
+#=====================
+my_text.text = start_msg
+my_text.draw()  #-present start message text
+win.flip() 
+event.waitKeys() #-allow participant to begin experiment with button press
+
+#blockTimer = core.Clock()
+#trialTimer = core.Clock()
+#stimTimer = core.Clock()
+#respTimer = core.Clock()
+#=====================
+#BLOCK SEQUENCE
+#=====================
+for block in range (nBlocks): #-for loop for nBlocks
+    #blockTimer.reset()
+    #blockStart = blockTimer.getTime()
+    
+    my_text.text = block_msg #-present block start message
+    my_text.draw()
+    win.flip()
+    event.waitKeys()
+    np.random.shuffle(stims) #-randomize order of trials here
+    #-reset response time clock here
+    
+    #=====================
+    #TRIAL SEQUENCE
+    #=====================    
+    for trial in range (nTrials):  #-for loop for nTrials *
+        #trialTimer.reset()
+        #trialStart = trialTimer.getTime()
+    
+        my_image.image = os.path.join(image_dir,stims[trial])
+        
+        #stimTimer.reset()
+        #while stimTimer() <= 1:
+        for frameN in range(total_frames):
+            
+            if 0 <= frameN <= fix_frames:
+                fix_text.draw() 
+                win.flip() 
+                #core.wait(.5)
+                if frameN == fix_frames: #last frame for the fixation
+                    print("End fix frame =", frameN) #print frame number
+        
+        #stimTimer.reset()
+        #respTimer.reset()
+        #while stimTimer() <= .5:
+            if fix_frames < frameN <= fix_frames + (fix_frames+image_frames):
+                my_image.draw()
+                win.flip()
+                if frameN == (fix_frames+image_frames): #last frame for the image
+                    print("End image frame =", frameN) #print frame number  
+            #core.wait(1)
+        
+        #stimTimer.reset()
+        #while stimTimer() <= 1:
+            if (fix_frames+image_frames) < frameN < total_frames:
+                if frameN == (fix_frames+image_frames) + 1:
+                    fix_text.draw() 
+                    win.flip() 
+                    if frameN == (total_frames-1): #last frame for the text
+                        print("End text frame =", frameN) #print frame number  
+                #core.wait(.5)
+        #print("Image Duration was {} seconds".format(imgEndTime - imgStartTime))
+                
+win.close()                
+
+2. After adding in the code to montior dropped frames, I can see that I'm dropping 60 frames during the experiment, or 3 per trial. In this case, I'll switch back to the clock method.
